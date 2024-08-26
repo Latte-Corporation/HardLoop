@@ -17,8 +17,10 @@ FROM eclipse-temurin:22-jre-jammy AS final
 WORKDIR /build
 
 COPY --chmod=755 server.jar /build/server.jar
+COPY --chmod=755 observer.py /build/observer.py
 RUN echo "eula=true" > /build/eula.txt
 
 EXPOSE 25565
 
 ENTRYPOINT [ "java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"]
+CMD [ "python3", "observer.py" ]
