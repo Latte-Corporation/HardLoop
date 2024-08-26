@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: hardloop
     ports:
       - "25565:25565"
     volumes:
