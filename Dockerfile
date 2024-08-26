@@ -17,7 +17,7 @@ FROM eclipse-temurin:22-jre-jammy AS final
 WORKDIR /build
 
 COPY --chmod=755 server.jar /build/server.jar
-COPY --chmod=644 eula.txt /build/eula.txt
+RUN echo "eula=true" > /build/eula.txt
 
 EXPOSE 25565
 
