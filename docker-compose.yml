@@ -1,0 +1,13 @@
+version: '3'
+services:
+  hardloop:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "25565:25565"
+    volumes:
+      - hardloop_data:/build
+
+volumes:
+  hardloop_data: {}
