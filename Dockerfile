@@ -1,26 +1,52 @@
-# syntax=docker/dockerfile:1
+### 1. Get Linux
+FROM alpine:3.20.2
 
-################################################################################
+### 2. Get gcc, musl-dev, libffi-dev, openssl-dev, python3-dev
+RUN apk update \
+    && apk upgrade \
+    && apk add --no-cache bash \
+    && apk add --no-cache --virtual=build-dependencies unzip \
+    && apk add --no-cache curl \
+    && apk add --no-cache gcc \
+    && apk add --no-cache musl-dev \
+    && apk add --no-cache libffi-dev \
+    && apk add --no-cache openssl-dev \
+    && apk add --no-cache python3-dev
 
-# Create a new stage for running the application that contains the minimal
-# runtime dependencies for the application. This often uses a different base
-# image from the install or build stage where the necessary files are copied
-# from the install stage.
-#
-# The example below uses eclipse-turmin's JRE image as the foundation for running the app.
-# By specifying the "22-jre-jammy" tag, it will also use whatever happens to be the
-# most recent version of that tag when you build your Dockerfile.
-# If reproducability is important, consider using a specific digest SHA, like
-# eclipse-temurin@sha256:99cede493dfd88720b610eb8077c8688d3cca50003d76d1d539b0efc8cca72b4.
-FROM eclipse-temurin:22-jre-jammy AS final
+### 3. Get Java via the package manager
+RUN apk update \
+    && apk upgrade \
+    && apk add --no-cache bash \
+    && apk add --no-cache --virtual=build-dependencies unzip \
+    && apk add --no-cache curl \
+    && apk add --no-cache openjdk21-jre
 
-WORKDIR /build
+### 4. Get Python, PIP
+RUN apk add --no-cache python3 py3-pip
 
-COPY --chmod=755 server.jar /build/server.jar
-COPY --chmod=755 observer.py /build/observer.py
-RUN echo "eula=true" > /build/eula.txt
+### 5. Get Poetry and ensure it's in PATH
+RUN curl -sSL https://install.python-poetry.org | python3 - \
+    && ln -s /root/.local/bin/poetry /usr/local/bin/poetry
 
+### 6. Set the working directory
+WORKDIR /hardloop
+
+### 7. Copy the files
+COPY hardloop/pyproject.toml hardloop/poetry.lock ./
+COPY hardloop/hardloop ./hardloop
+RUN touch README.md
+
+### 8. Install the dependencies
+RUN poetry install --no-dev
+
+### 9. Validate the eula
+RUN echo "eula=true" > /hardloop/eula.txt
+
+### 10. Copy the server properties
+COPY server.properties /hardloop/server.properties
+
+### 11. Expose the port
 EXPOSE 25565
 
-ENTRYPOINT [ "java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"]
-#CMD [ "python3", "observer.py" ]
+### 12. Run the script
+CMD ["poetry", "run", "python", "-m", "hardloop.main"]
