@@ -8,7 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 requests = "^2.32.3"
-rcon = "^2.4.6"
+mcrcon = "^0.7.0"
 
 
 [build-system]

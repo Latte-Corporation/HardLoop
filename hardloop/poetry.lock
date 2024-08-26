@@ -122,18 +122,14 @@ files = [
 ]
 
 [[package]]
-name = "rcon"
-version = "2.4.6"
-description = "An RCON client library."
+name = "mcrcon"
+version = "0.7.0"
+description = "A client for handling Remote Commands (RCON) to a Minecraft server."
 optional = false
-python-versions = ">=3.10"
+python-versions = "*"
 files = [
-    {file = "rcon-2.4.6-py3-none-any.whl", hash = "sha256:cd7f4f3a6f1ee1786c08c58d46333ca252a9a969e8bb1418ec4cff8747a54d69"},
-    {file = "rcon-2.4.6.tar.gz", hash = "sha256:e89697860e33312d99df8d54408b9d0fae179858b52ae4b8dadb72c978d7c4d2"},
+    {file = "mcrcon-0.7.0.tar.gz", hash = "sha256:c2f1caf2467e283e0ccd2436f1ce21f04242b03c5fafb3860e3924d764a910d4"},
 ]
-
-[package.extras]
-gui = ["pygobject", "pygtk"]
 
 [[package]]
 name = "requests"
@@ -176,4 +172,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "35566a2d14e8e27734793d91b67ba755ca54739e17e50e03cd32f08d6ccbd903"
+content-hash = "0e2c230f0e8c9aecf42cdc2e201cff4908d73277bd43a0db7b5b33a1f5abba61"
