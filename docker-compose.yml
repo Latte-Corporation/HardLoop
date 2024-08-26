@@ -8,6 +8,8 @@ services:
       - "25565:25565"
     volumes:
       - hardloop_data:/build
+    stdin_open: true
+    tty: true
 
 volumes:
   hardloop_data: {}
