@@ -13,4 +13,4 @@ services:
     tty: true
 
 volumes:
-  hardloop_data: {}
+  hardloop: {}
