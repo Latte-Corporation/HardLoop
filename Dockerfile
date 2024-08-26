@@ -23,4 +23,4 @@ RUN echo "eula=true" > /build/eula.txt
 EXPOSE 25565
 
 ENTRYPOINT [ "java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"]
-CMD [ "python3", "observer.py" ]
+#CMD [ "python3", "observer.py" ]
