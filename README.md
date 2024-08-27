@@ -1,7 +1,9 @@
 # HardLoop
 
 
-![Hardloop Logo](./HardLoop_Logo.webp){: width="500px"}
+<div style="text-align:center">
+  <img src="./HardLoop_Logo.webp" alt="Hardloop Logo" style="width:500px">
+</div>
 
 
 ## About Hardloop
