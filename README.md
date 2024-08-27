@@ -1,10 +1,9 @@
 # HardLoop
 
 
-<div style="text-align:center">
-  <img src="./HardLoop_Logo.webp" alt="Hardloop Logo" style="width:500px">
-</div>
-
+<p align="center">
+    <img width="500" alt="horz - dark" src="./HardLoop_Logo.webp">
+</p>
 
 ## About Hardloop
 Hardloop is a dynamic Minecraft server project designed with an emphasis on infinite gameplay loops and automated server resets. Whether you're a server administrator looking for a robust solution to manage player deaths or a developer interested in how to automate and manage server resets, Hardloop offers a streamlined approach with a variety of custom features.
