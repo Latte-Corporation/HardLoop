@@ -4,7 +4,6 @@ import sys
 import requests
 
 baseUrl = "piston-meta.mojang.com"
-allVersions = None
 
 
 def get_url_for_version(version_id, data):
@@ -22,15 +21,16 @@ def get_server_jar_url(version_url):
     return version_data["downloads"]["server"]["url"]
 
 
-def download_server_file():
+def download_server_file(mc_version=None):
+    allVersions = None
+
     # Get the minecraft server version wanted
-    if len(sys.argv) > 1:
-        version = sys.argv[1]
+    if mc_version is not None:
         # Ceck if the version has valid format with regex
-        if re.match(r"^([0-9]+)\.([0-9]+)\.([0-9])", version):
-            print("Version: ", version)
+        if re.match(r"^([0-9]+)\.([0-9]+)\.([0-9])", mc_version):
+            print("Version: ", mc_version)
         else:
-            print("Invalid version format")
+            print("Invalid version format, expected x.x.x")
             sys.exit(1)
     else:
         print("No version provided getting the latest version")
@@ -39,8 +39,8 @@ def download_server_file():
             f"https://{baseUrl}/mc/game/version_manifest.json"
         ).json()
 
-        version = allVersions["latest"]["release"]
-        print("Version: ", version)
+        mc_version = allVersions["latest"]["release"]
+        print("Version: ", mc_version)
 
     # Get the url to the selected version
 
@@ -49,7 +49,7 @@ def download_server_file():
             f"https://{baseUrl}/mc/game/version_manifest.json"
         ).json()
 
-    versionUrl = get_url_for_version(version, allVersions)
+    versionUrl = get_url_for_version(mc_version, allVersions)
     serverJarUrl = get_server_jar_url(versionUrl)
 
     # Download the server jar
