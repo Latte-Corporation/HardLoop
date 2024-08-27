@@ -7,9 +7,19 @@ import os
 
 mc_version = os.getenv("MC_VERSION", None)
 mc_port = os.getenv("MC_PORT", 25565)
+mc_eula = os.getenv("MC_EULA", "false")
 
 
 async def main():
+
+    if mc_eula.lower() == "true":
+        with open("eula.txt", "w") as f:
+            f.write("eula=true")
+            print("EULA accepted")
+    else:
+        print("EULA not accepted, exiting")
+        return
+
     download_server_file(mc_version)
     while True:
         server_process = await start_server(mc_port)

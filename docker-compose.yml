@@ -11,7 +11,8 @@ services:
       - hardloop:/hardloop/*
     stdin_open: true
     tty: true
-    # environment:
+    environment:
+      - MC_EULA=false # If you want to accept the EULA, change this to true
       # - MC_VERSION=1.7.10
       # - MC_PORT=418  # If you want to change the port, you need to change it line 9 as well
 

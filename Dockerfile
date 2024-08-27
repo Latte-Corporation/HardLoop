@@ -39,14 +39,11 @@ RUN touch README.md
 ### 8. Install the dependencies
 RUN poetry install --no-dev
 
-### 9. Validate the eula
-RUN echo "eula=true" > /hardloop/eula.txt
-
-### 10. Copy the server properties
+### 9. Copy the server properties
 COPY server.properties /hardloop/server.properties
 
-### 11. Expose the port
+### 10. Expose the port
 EXPOSE 25565
 
-### 12. Run the script
+### 11. Run the script
 CMD ["poetry", "run", "python", "-m", "hardloop.main"]
