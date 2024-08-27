@@ -22,17 +22,23 @@ async def start_server(server_port=25565):
     return process
 
 
-async def rename_world():
-    os.system("mv /hardloop/world /hardloop/world_" + str(time.time()))
-    print("World renamed")
+async def rename_world(backup_enabled="true"):
+    if backup_enabled.lower() == "true":
+        os.system("mv /hardloop/world /hardloop/old_worlds/world_" +
+                  str(time.time()))
+        print("World saved")
+    else:
+        os.system("rm -rf /hardloop/world")
+        os.system("mkdir /hardloop/old_worlds/world_" + str(time.time()))
+        print("World deleted")
 
 
 def count_world_resets():
-    world_dir = "/hardloop"
+    world_dir = "/hardloop/old_worlds"
     world_count = len(
-      [d for d in os.listdir(world_dir) if d.startswith("world")]
-      )
-    return world_count
+        [d for d in os.listdir(world_dir) if d.startswith("world")]
+    )
+    return world_count + 1
 
 
 def update_server_properties(properties, value):

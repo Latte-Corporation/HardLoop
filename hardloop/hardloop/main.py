@@ -8,6 +8,7 @@ import os
 mc_version = os.getenv("MC_VERSION", None)
 mc_port = os.getenv("MC_PORT", 25565)
 mc_eula = os.getenv("MC_EULA", "false")
+mc_backup = os.getenv("MC_BACKUP", "true")
 
 
 async def main():
@@ -29,7 +30,7 @@ async def main():
 
         print("Server has stopped, restarting...")
         listen_task.cancel()
-        await rename_world()
+        await rename_world(mc_backup)
 
 
 if __name__ == "__main__":

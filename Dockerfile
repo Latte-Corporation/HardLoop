@@ -36,14 +36,17 @@ COPY hardloop/pyproject.toml hardloop/poetry.lock ./
 COPY hardloop/hardloop ./hardloop
 RUN touch README.md
 
-### 8. Install the dependencies
+### 8. Create folder for old worlds
+RUN mkdir -p /hardloop/old_worlds
+
+### 9. Install the dependencies
 RUN poetry install --no-dev
 
-### 9. Copy the server properties
+### 10. Copy the server properties
 COPY server.properties /hardloop/server.properties
 
-### 10. Expose the port
+### 11. Expose the port
 EXPOSE 25565
 
-### 11. Run the script
+### 12. Run the script
 CMD ["poetry", "run", "python", "-m", "hardloop.main"]
