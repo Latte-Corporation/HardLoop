@@ -1,7 +1,6 @@
 import asyncio
 from mcrcon import MCRcon
 from .server import update_motd
-import aioping
 
 last_dead_player = "Unknown"
 
@@ -12,13 +11,21 @@ async def listen():
     with MCRcon("0.0.0.0", "password", port=25575) as client:
         while True:
             try:
-                response = client.command("/scoreboard players list")
-                if "There are no tracked entities" not in response:
-                    last_dead_player = response.split(": ")[1]
-                    client.command(f"/kick @a {last_dead_player} is dead !")
-                    update_motd(last_dead_player)
-                    await reset_server(client)
-                    break
+                players = client.command("/list")
+                players = players.split(": ")[1].split(", ")
+                if len(players) != 0:
+                    for player in players:
+                        response = client.command(
+                            f"/scoreboard players get {player} Deaths"
+                        )
+                        if "has" in response:
+                            last_dead_player = player
+                            client.command(
+                                f"/kick @a {last_dead_player} is dead !"
+                            )
+                            update_motd(last_dead_player)
+                            await reset_server(client)
+                            break
             except Exception:
                 print("error fetching deaths")
 
