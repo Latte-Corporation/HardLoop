@@ -16,6 +16,8 @@ async def start_server(server_port=25565):
         try:
             with MCRcon("hardloop", "password", port=25575) as client:
                 client.command("/scoreboard objectives add Deaths deathCount")
+                client.command("/scoreboard objectives add health health")
+                client.command("/scoreboard objectives setdisplay list health")
                 break
         except Exception:
             await asyncio.sleep(1)
