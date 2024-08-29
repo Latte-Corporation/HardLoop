@@ -18,6 +18,18 @@ async def start_server(server_port=25565):
                 client.command("/scoreboard objectives add Deaths deathCount")
                 client.command("/scoreboard objectives add health health")
                 client.command("/scoreboard objectives setdisplay list health")
+                client.command("/scoreboard objectives add Hardloop dummy {\"text\":\"HardLoop\",\"bold\":true,\"color\":\"light_purple\"}")
+                client.command("/scoreboard objectives setdisplay sidebar Hardloop")
+                client.command("/scoreboard players set Uptime Hardloop 1")
+                client.command("/scoreboard players set Played Hardloop 0")
+                client.command("/team add uptime")
+                client.command("/team add played")
+                client.command("/team join uptime Uptime")
+                client.command("/team join played Played")
+                client.command("/team modify uptime color red")
+                client.command("/team modify played color red")
+                client.command("/team modify uptime suffix {\"text\":\" : 00m00\",\"color\":\"red\"}")
+                client.command("/team modify played suffix {\"text\":\" Time : 00m00\",\"color\":\"red\"}")
                 break
         except Exception:
             await asyncio.sleep(1)
