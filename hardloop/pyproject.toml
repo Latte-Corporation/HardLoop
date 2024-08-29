@@ -9,7 +9,6 @@ readme = "README.md"
 python = "^3.12"
 requests = "^2.32.3"
 mcrcon = "^0.7.0"
-aioping = "^0.4.0"
 
 
 [build-system]
