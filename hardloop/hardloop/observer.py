@@ -47,9 +47,19 @@ async def reset_server(client):
 def uptime_incr():
     global server_uptime
     server_uptime = server_uptime + 1
-    return server_uptime
+    return int_to_date(server_uptime)
 
 def played_time_incr():
     global played_time
     played_time = played_time + 1
-    return played_time
+    return int_to_date(played_time)
+
+def int_to_date(time: int) -> str:
+    seconds = time % 60
+    minutes = time // 60 % 60
+    hours = time // 3600 % 24
+    days = time // 86400
+    if (minutes == 0 and hours == 0 and days == 0): return f"{seconds}s"
+    if (hours == 0 and days == 0): return f"{minutes}m {seconds}s"
+    if (days == 0): return f"{hours}h {minutes}m {seconds}s"
+    return f"{days}d {hours}h {minutes}m {seconds}s"
