@@ -20,7 +20,6 @@ To get started with Hardloop, simply clone the repository and customize the dock
 Then, you can build and run the server using the following commands:
 
 ```bash
-docker-compose build
 docker-compose up
 ```
 

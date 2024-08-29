@@ -10,7 +10,6 @@ mc_port = os.getenv("MC_PORT", 25565)
 mc_eula = os.getenv("MC_EULA", "false")
 mc_backup = os.getenv("MC_BACKUP", "true")
 
-
 async def main():
 
     if mc_eula.lower() == "true":
