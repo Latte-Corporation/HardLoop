@@ -12,6 +12,9 @@ services:
     tty: true
     environment:
       - MC_EULA=false # If you want to accept the EULA, change this to true
+      # - DISCORD_ENABLED=true # If you want to disable Discord, change this to false
+      # - DISCORD_WEBHOOK_URL=<url> # If you want to change the webhook URL, change this to your own
+      # - DISCORD_LOG_LEVEL=INFO # If you want to change the log level, change this to DEBUG, INFO, WARNING, ERROR, CRITICAL
       # - MC_VERSION=1.7.10
       # - MC_PORT=418  # If you want to change the port, you need to change it line 9 as well
       # - MC_BACKUP=true # If you want to disable backups, change this to false
